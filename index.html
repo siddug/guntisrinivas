@@ -1,1 +1,1933 @@
-<h1>Happy Birthday!</h1>
+<html>
+  <head>
+    <title>Gunti's</title>
+  </head>
+<body>
+
+<style>
+  /* https://css-tricks.com/seamless-responsive-photo-grid/ */
+body {
+  background: #ededed;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 10px 20px, whitesmoke 0px -1px 0px;
+  padding-top: 60px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  padding: 50px;
+  background: #fff;
+  margin: 0px 60px 60px 60px;
+  border-radius: 5px;
+}
+
+.clocks {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 5%;
+  grid-row-gap: 0;
+}
+
+.number {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+}
+
+.digit {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+}
+
+.pixel {
+  padding-top: calc(100% - 2px);
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.clock {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 2px, inset rgba(0, 0, 0, 0.1) 0 2px 2px;
+}
+
+.clock:before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: #555;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.hand {
+  width: 2px;
+  background-color: #555;
+  border-radius: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: transform 500ms ease-in-out;
+}
+
+.hand_hour {
+  height: 30%;
+  transform: translate(-50%, -50%) rotate(60deg) translateY(-50%);
+}
+
+.hand_minute {
+  height: 40%;
+  transform: translate(-50%, -50%) rotate(-60deg) translateY(-50%);
+  z-index: 1;
+}
+
+.digit_0 .pixel:nth-child(1) .hand_hour,
+.digit_0 .pixel:nth-child(6) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(1) .hand_minute,
+.digit_0 .pixel:nth-child(6) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(2) .hand_hour,
+.digit_0 .pixel:nth-child(3) .hand_hour,
+.digit_0 .pixel:nth-child(22) .hand_hour,
+.digit_0 .pixel:nth-child(23) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(2) .hand_minute,
+.digit_0 .pixel:nth-child(3) .hand_minute,
+.digit_0 .pixel:nth-child(22) .hand_minute,
+.digit_0 .pixel:nth-child(23) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(4) .hand_hour,
+.digit_0 .pixel:nth-child(7) .hand_hour {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(4) .hand_minute,
+.digit_0 .pixel:nth-child(7) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(5) .hand_hour,
+.digit_0 .pixel:nth-child(8) .hand_hour,
+.digit_0 .pixel:nth-child(9) .hand_hour,
+.digit_0 .pixel:nth-child(10) .hand_hour,
+.digit_0 .pixel:nth-child(11) .hand_hour,
+.digit_0 .pixel:nth-child(12) .hand_hour,
+.digit_0 .pixel:nth-child(13) .hand_hour,
+.digit_0 .pixel:nth-child(14) .hand_hour,
+.digit_0 .pixel:nth-child(15) .hand_hour,
+.digit_0 .pixel:nth-child(16) .hand_hour,
+.digit_0 .pixel:nth-child(17) .hand_hour,
+.digit_0 .pixel:nth-child(20) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(5) .hand_minute,
+.digit_0 .pixel:nth-child(8) .hand_minute,
+.digit_0 .pixel:nth-child(9) .hand_minute,
+.digit_0 .pixel:nth-child(10) .hand_minute,
+.digit_0 .pixel:nth-child(11) .hand_minute,
+.digit_0 .pixel:nth-child(12) .hand_minute,
+.digit_0 .pixel:nth-child(13) .hand_minute,
+.digit_0 .pixel:nth-child(14) .hand_minute,
+.digit_0 .pixel:nth-child(15) .hand_minute,
+.digit_0 .pixel:nth-child(16) .hand_minute,
+.digit_0 .pixel:nth-child(17) .hand_minute,
+.digit_0 .pixel:nth-child(20) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(18) .hand_hour,
+.digit_0 .pixel:nth-child(21) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(18) .hand_minute,
+.digit_0 .pixel:nth-child(21) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(19) .hand_hour,
+.digit_0 .pixel:nth-child(24) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_0 .pixel:nth-child(19) .hand_minute,
+.digit_0 .pixel:nth-child(24) .hand_minute {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(1) .hand_hour,
+.digit_1 .pixel:nth-child(17) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(1) .hand_minute,
+.digit_1 .pixel:nth-child(17) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(2) .hand_hour,
+.digit_1 .pixel:nth-child(22) .hand_hour,
+.digit_1 .pixel:nth-child(23) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(2) .hand_minute,
+.digit_1 .pixel:nth-child(22) .hand_minute,
+.digit_1 .pixel:nth-child(23) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(3) .hand_hour,
+.digit_1 .pixel:nth-child(6) .hand_hour,
+.digit_1 .pixel:nth-child(20) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(3) .hand_minute,
+.digit_1 .pixel:nth-child(6) .hand_minute,
+.digit_1 .pixel:nth-child(20) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(4) .hand_hour,
+.digit_1 .pixel:nth-child(8) .hand_hour,
+.digit_1 .pixel:nth-child(9) .hand_hour,
+.digit_1 .pixel:nth-child(12) .hand_hour,
+.digit_1 .pixel:nth-child(13) .hand_hour,
+.digit_1 .pixel:nth-child(16) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-135deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(4) .hand_minute,
+.digit_1 .pixel:nth-child(8) .hand_minute,
+.digit_1 .pixel:nth-child(9) .hand_minute,
+.digit_1 .pixel:nth-child(12) .hand_minute,
+.digit_1 .pixel:nth-child(13) .hand_minute,
+.digit_1 .pixel:nth-child(16) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-135deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(5) .hand_hour,
+.digit_1 .pixel:nth-child(19) .hand_hour,
+.digit_1 .pixel:nth-child(21) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(5) .hand_minute,
+.digit_1 .pixel:nth-child(19) .hand_minute,
+.digit_1 .pixel:nth-child(21) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(7) .hand_hour,
+.digit_1 .pixel:nth-child(10) .hand_hour,
+.digit_1 .pixel:nth-child(11) .hand_hour,
+.digit_1 .pixel:nth-child(14) .hand_hour,
+.digit_1 .pixel:nth-child(15) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(7) .hand_minute,
+.digit_1 .pixel:nth-child(10) .hand_minute,
+.digit_1 .pixel:nth-child(11) .hand_minute,
+.digit_1 .pixel:nth-child(14) .hand_minute,
+.digit_1 .pixel:nth-child(15) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(18) .hand_hour,
+.digit_1 .pixel:nth-child(24) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_1 .pixel:nth-child(18) .hand_minute,
+.digit_1 .pixel:nth-child(24) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(1) .hand_hour,
+.digit_2 .pixel:nth-child(9) .hand_hour,
+.digit_2 .pixel:nth-child(14) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(1) .hand_minute,
+.digit_2 .pixel:nth-child(9) .hand_minute,
+.digit_2 .pixel:nth-child(14) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(2) .hand_hour,
+.digit_2 .pixel:nth-child(3) .hand_hour,
+.digit_2 .pixel:nth-child(6) .hand_hour,
+.digit_2 .pixel:nth-child(10) .hand_hour,
+.digit_2 .pixel:nth-child(15) .hand_hour,
+.digit_2 .pixel:nth-child(19) .hand_hour,
+.digit_2 .pixel:nth-child(22) .hand_hour,
+.digit_2 .pixel:nth-child(23) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(2) .hand_minute,
+.digit_2 .pixel:nth-child(3) .hand_minute,
+.digit_2 .pixel:nth-child(6) .hand_minute,
+.digit_2 .pixel:nth-child(10) .hand_minute,
+.digit_2 .pixel:nth-child(15) .hand_minute,
+.digit_2 .pixel:nth-child(19) .hand_minute,
+.digit_2 .pixel:nth-child(22) .hand_minute,
+.digit_2 .pixel:nth-child(23) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(4) .hand_hour,
+.digit_2 .pixel:nth-child(7) .hand_hour,
+.digit_2 .pixel:nth-child(20) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(4) .hand_minute,
+.digit_2 .pixel:nth-child(7) .hand_minute,
+.digit_2 .pixel:nth-child(20) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-180deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(5) .hand_hour,
+.digit_2 .pixel:nth-child(18) .hand_hour,
+.digit_2 .pixel:nth-child(21) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(5) .hand_minute,
+.digit_2 .pixel:nth-child(18) .hand_minute,
+.digit_2 .pixel:nth-child(21) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(8) .hand_hour,
+.digit_2 .pixel:nth-child(12) .hand_hour,
+.digit_2 .pixel:nth-child(13) .hand_hour,
+.digit_2 .pixel:nth-child(17) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(8) .hand_minute,
+.digit_2 .pixel:nth-child(12) .hand_minute,
+.digit_2 .pixel:nth-child(13) .hand_minute,
+.digit_2 .pixel:nth-child(17) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(11) .hand_hour,
+.digit_2 .pixel:nth-child(16) .hand_hour,
+.digit_2 .pixel:nth-child(24) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_2 .pixel:nth-child(11) .hand_minute,
+.digit_2 .pixel:nth-child(16) .hand_minute,
+.digit_2 .pixel:nth-child(24) .hand_minute {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(1) .hand_hour,
+.digit_3 .pixel:nth-child(10) .hand_hour,
+.digit_3 .pixel:nth-child(17) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(1) .hand_minute,
+.digit_3 .pixel:nth-child(10) .hand_minute,
+.digit_3 .pixel:nth-child(17) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(2) .hand_hour,
+.digit_3 .pixel:nth-child(3) .hand_hour,
+.digit_3 .pixel:nth-child(6) .hand_hour,
+.digit_3 .pixel:nth-child(18) .hand_hour,
+.digit_3 .pixel:nth-child(22) .hand_hour,
+.digit_3 .pixel:nth-child(23) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(2) .hand_minute,
+.digit_3 .pixel:nth-child(3) .hand_minute,
+.digit_3 .pixel:nth-child(6) .hand_minute,
+.digit_3 .pixel:nth-child(18) .hand_minute,
+.digit_3 .pixel:nth-child(22) .hand_minute,
+.digit_3 .pixel:nth-child(23) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(4) .hand_hour,
+.digit_3 .pixel:nth-child(7) .hand_hour,
+.digit_3 .pixel:nth-child(15) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(4) .hand_minute,
+.digit_3 .pixel:nth-child(7) .hand_minute,
+.digit_3 .pixel:nth-child(15) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-180deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(5) .hand_hour,
+.digit_3 .pixel:nth-child(14) .hand_hour,
+.digit_3 .pixel:nth-child(21) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(5) .hand_minute,
+.digit_3 .pixel:nth-child(14) .hand_minute,
+.digit_3 .pixel:nth-child(21) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(8) .hand_hour,
+.digit_3 .pixel:nth-child(12) .hand_hour,
+.digit_3 .pixel:nth-child(16) .hand_hour,
+.digit_3 .pixel:nth-child(20) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(8) .hand_minute,
+.digit_3 .pixel:nth-child(12) .hand_minute,
+.digit_3 .pixel:nth-child(16) .hand_minute,
+.digit_3 .pixel:nth-child(20) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(11) .hand_hour,
+.digit_3 .pixel:nth-child(19) .hand_hour,
+.digit_3 .pixel:nth-child(24) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(11) .hand_minute,
+.digit_3 .pixel:nth-child(19) .hand_minute,
+.digit_3 .pixel:nth-child(24) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(9) .hand_hour,
+.digit_3 .pixel:nth-child(13) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-135deg) translateY(-50%);
+}
+
+.digit_3 .pixel:nth-child(9) .hand_minute,
+.digit_3 .pixel:nth-child(13) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-135deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(1) .hand_hour,
+.digit_4 .pixel:nth-child(3) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(1) .hand_minute,
+.digit_4 .pixel:nth-child(3) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(2) .hand_hour,
+.digit_4 .pixel:nth-child(4) .hand_hour,
+.digit_4 .pixel:nth-child(15) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(2) .hand_minute,
+.digit_4 .pixel:nth-child(4) .hand_minute,
+.digit_4 .pixel:nth-child(15) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(5) .hand_hour,
+.digit_4 .pixel:nth-child(6) .hand_hour,
+.digit_4 .pixel:nth-child(7) .hand_hour,
+.digit_4 .pixel:nth-child(8) .hand_hour,
+.digit_4 .pixel:nth-child(9) .hand_hour,
+.digit_4 .pixel:nth-child(12) .hand_hour,
+.digit_4 .pixel:nth-child(16) .hand_hour,
+.digit_4 .pixel:nth-child(19) .hand_hour,
+.digit_4 .pixel:nth-child(20) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(5) .hand_minute,
+.digit_4 .pixel:nth-child(6) .hand_minute,
+.digit_4 .pixel:nth-child(7) .hand_minute,
+.digit_4 .pixel:nth-child(8) .hand_minute,
+.digit_4 .pixel:nth-child(9) .hand_minute,
+.digit_4 .pixel:nth-child(12) .hand_minute,
+.digit_4 .pixel:nth-child(16) .hand_minute,
+.digit_4 .pixel:nth-child(19) .hand_minute,
+.digit_4 .pixel:nth-child(20) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(10) .hand_hour,
+.digit_4 .pixel:nth-child(13) .hand_hour,
+.digit_4 .pixel:nth-child(23) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(10) .hand_minute,
+.digit_4 .pixel:nth-child(13) .hand_minute,
+.digit_4 .pixel:nth-child(23) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(11) .hand_hour,
+.digit_4 .pixel:nth-child(24) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(11) .hand_minute,
+.digit_4 .pixel:nth-child(24) .hand_minute {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(14) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(14) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(17) .hand_hour,
+.digit_4 .pixel:nth-child(18) .hand_hour,
+.digit_4 .pixel:nth-child(21) .hand_hour,
+.digit_4 .pixel:nth-child(22) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-135deg) translateY(-50%);
+}
+
+.digit_4 .pixel:nth-child(17) .hand_minute,
+.digit_4 .pixel:nth-child(18) .hand_minute,
+.digit_4 .pixel:nth-child(21) .hand_minute,
+.digit_4 .pixel:nth-child(22) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-135deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(1) .hand_hour,
+.digit_5 .pixel:nth-child(6) .hand_hour,
+.digit_5 .pixel:nth-child(17) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(1) .hand_minute,
+.digit_5 .pixel:nth-child(6) .hand_minute,
+.digit_5 .pixel:nth-child(17) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(2) .hand_hour,
+.digit_5 .pixel:nth-child(3) .hand_hour,
+.digit_5 .pixel:nth-child(7) .hand_hour,
+.digit_5 .pixel:nth-child(11) .hand_hour,
+.digit_5 .pixel:nth-child(14) .hand_hour,
+.digit_5 .pixel:nth-child(18) .hand_hour,
+.digit_5 .pixel:nth-child(22) .hand_hour,
+.digit_5 .pixel:nth-child(23) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(2) .hand_minute,
+.digit_5 .pixel:nth-child(3) .hand_minute,
+.digit_5 .pixel:nth-child(7) .hand_minute,
+.digit_5 .pixel:nth-child(11) .hand_minute,
+.digit_5 .pixel:nth-child(14) .hand_minute,
+.digit_5 .pixel:nth-child(18) .hand_minute,
+.digit_5 .pixel:nth-child(22) .hand_minute,
+.digit_5 .pixel:nth-child(23) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(4) .hand_hour,
+.digit_5 .pixel:nth-child(12) .hand_hour,
+.digit_5 .pixel:nth-child(15) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(4) .hand_minute,
+.digit_5 .pixel:nth-child(12) .hand_minute,
+.digit_5 .pixel:nth-child(15) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(5) .hand_hour,
+.digit_5 .pixel:nth-child(9) .hand_hour,
+.digit_5 .pixel:nth-child(16) .hand_hour,
+.digit_5 .pixel:nth-child(20) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(5) .hand_minute,
+.digit_5 .pixel:nth-child(9) .hand_minute,
+.digit_5 .pixel:nth-child(16) .hand_minute,
+.digit_5 .pixel:nth-child(20) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(8) .hand_hour,
+.digit_5 .pixel:nth-child(19) .hand_hour,
+.digit_5 .pixel:nth-child(24) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(8) .hand_minute,
+.digit_5 .pixel:nth-child(19) .hand_minute,
+.digit_5 .pixel:nth-child(24) .hand_minute {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(10) .hand_hour,
+.digit_5 .pixel:nth-child(13) .hand_hour,
+.digit_5 .pixel:nth-child(21) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_5 .pixel:nth-child(10) .hand_minute,
+.digit_5 .pixel:nth-child(13) .hand_minute,
+.digit_5 .pixel:nth-child(21) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(1) .hand_hour,
+.digit_6 .pixel:nth-child(6) .hand_hour,
+.digit_6 .pixel:nth-child(14) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(1) .hand_minute,
+.digit_6 .pixel:nth-child(6) .hand_minute,
+.digit_6 .pixel:nth-child(14) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(2) .hand_hour,
+.digit_6 .pixel:nth-child(3) .hand_hour,
+.digit_6 .pixel:nth-child(7) .hand_hour,
+.digit_6 .pixel:nth-child(11) .hand_hour,
+.digit_6 .pixel:nth-child(22) .hand_hour,
+.digit_6 .pixel:nth-child(23) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(2) .hand_minute,
+.digit_6 .pixel:nth-child(3) .hand_minute,
+.digit_6 .pixel:nth-child(7) .hand_minute,
+.digit_6 .pixel:nth-child(11) .hand_minute,
+.digit_6 .pixel:nth-child(22) .hand_minute,
+.digit_6 .pixel:nth-child(23) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(4) .hand_hour,
+.digit_6 .pixel:nth-child(12) .hand_hour,
+.digit_6 .pixel:nth-child(15) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(4) .hand_minute,
+.digit_6 .pixel:nth-child(12) .hand_minute,
+.digit_6 .pixel:nth-child(15) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(5) .hand_hour,
+.digit_6 .pixel:nth-child(9) .hand_hour,
+.digit_6 .pixel:nth-child(13) .hand_hour,
+.digit_6 .pixel:nth-child(16) .hand_hour,
+.digit_6 .pixel:nth-child(17) .hand_hour,
+.digit_6 .pixel:nth-child(20) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(5) .hand_minute,
+.digit_6 .pixel:nth-child(9) .hand_minute,
+.digit_6 .pixel:nth-child(13) .hand_minute,
+.digit_6 .pixel:nth-child(16) .hand_minute,
+.digit_6 .pixel:nth-child(17) .hand_minute,
+.digit_6 .pixel:nth-child(20) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(10) .hand_hour,
+.digit_6 .pixel:nth-child(18) .hand_hour,
+.digit_6 .pixel:nth-child(21) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(10) .hand_minute,
+.digit_6 .pixel:nth-child(18) .hand_minute,
+.digit_6 .pixel:nth-child(21) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(8) .hand_hour,
+.digit_6 .pixel:nth-child(19) .hand_hour,
+.digit_6 .pixel:nth-child(24) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_6 .pixel:nth-child(8) .hand_minute,
+.digit_6 .pixel:nth-child(19) .hand_minute,
+.digit_6 .pixel:nth-child(24) .hand_minute {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(1) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(1) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(2) .hand_hour,
+.digit_7 .pixel:nth-child(3) .hand_hour,
+.digit_7 .pixel:nth-child(6) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(2) .hand_minute,
+.digit_7 .pixel:nth-child(3) .hand_minute,
+.digit_7 .pixel:nth-child(6) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(4) .hand_hour,
+.digit_7 .pixel:nth-child(7) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(4) .hand_minute,
+.digit_7 .pixel:nth-child(7) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(5) .hand_hour,
+.digit_7 .pixel:nth-child(23) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(5) .hand_minute,
+.digit_7 .pixel:nth-child(23) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(8) .hand_hour,
+.digit_7 .pixel:nth-child(11) .hand_hour,
+.digit_7 .pixel:nth-child(12) .hand_hour,
+.digit_7 .pixel:nth-child(15) .hand_hour,
+.digit_7 .pixel:nth-child(16) .hand_hour,
+.digit_7 .pixel:nth-child(19) .hand_hour,
+.digit_7 .pixel:nth-child(20) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(8) .hand_minute,
+.digit_7 .pixel:nth-child(11) .hand_minute,
+.digit_7 .pixel:nth-child(12) .hand_minute,
+.digit_7 .pixel:nth-child(15) .hand_minute,
+.digit_7 .pixel:nth-child(16) .hand_minute,
+.digit_7 .pixel:nth-child(19) .hand_minute,
+.digit_7 .pixel:nth-child(20) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(24) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(24) .hand_minute {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(9) .hand_hour,
+.digit_7 .pixel:nth-child(10) .hand_hour,
+.digit_7 .pixel:nth-child(13) .hand_hour,
+.digit_7 .pixel:nth-child(14) .hand_hour,
+.digit_7 .pixel:nth-child(17) .hand_hour,
+.digit_7 .pixel:nth-child(18) .hand_hour,
+.digit_7 .pixel:nth-child(21) .hand_hour,
+.digit_7 .pixel:nth-child(22) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-135deg) translateY(-50%);
+}
+
+.digit_7 .pixel:nth-child(9) .hand_minute,
+.digit_7 .pixel:nth-child(10) .hand_minute,
+.digit_7 .pixel:nth-child(13) .hand_minute,
+.digit_7 .pixel:nth-child(14) .hand_minute,
+.digit_7 .pixel:nth-child(17) .hand_minute,
+.digit_7 .pixel:nth-child(18) .hand_minute,
+.digit_7 .pixel:nth-child(21) .hand_minute,
+.digit_7 .pixel:nth-child(22) .hand_minute {
+  transform: translate(-50%, -50%) rotate(-135deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(1) .hand_hour,
+.digit_8 .pixel:nth-child(6) .hand_hour,
+.digit_8 .pixel:nth-child(14) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(1) .hand_minute,
+.digit_8 .pixel:nth-child(6) .hand_minute,
+.digit_8 .pixel:nth-child(14) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(2) .hand_hour,
+.digit_8 .pixel:nth-child(3) .hand_hour,
+.digit_8 .pixel:nth-child(22) .hand_hour,
+.digit_8 .pixel:nth-child(23) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(2) .hand_minute,
+.digit_8 .pixel:nth-child(3) .hand_minute,
+.digit_8 .pixel:nth-child(22) .hand_minute,
+.digit_8 .pixel:nth-child(23) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(4) .hand_hour,
+.digit_8 .pixel:nth-child(7) .hand_hour,
+.digit_8 .pixel:nth-child(15) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(4) .hand_minute,
+.digit_8 .pixel:nth-child(7) .hand_minute,
+.digit_8 .pixel:nth-child(15) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(5) .hand_hour,
+.digit_8 .pixel:nth-child(8) .hand_hour,
+.digit_8 .pixel:nth-child(9) .hand_hour,
+.digit_8 .pixel:nth-child(12) .hand_hour,
+.digit_8 .pixel:nth-child(13) .hand_hour,
+.digit_8 .pixel:nth-child(16) .hand_hour,
+.digit_8 .pixel:nth-child(17) .hand_hour,
+.digit_8 .pixel:nth-child(20) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(5) .hand_minute,
+.digit_8 .pixel:nth-child(8) .hand_minute,
+.digit_8 .pixel:nth-child(9) .hand_minute,
+.digit_8 .pixel:nth-child(12) .hand_minute,
+.digit_8 .pixel:nth-child(13) .hand_minute,
+.digit_8 .pixel:nth-child(16) .hand_minute,
+.digit_8 .pixel:nth-child(17) .hand_minute,
+.digit_8 .pixel:nth-child(20) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(10) .hand_hour,
+.digit_8 .pixel:nth-child(18) .hand_hour,
+.digit_8 .pixel:nth-child(21) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(10) .hand_minute,
+.digit_8 .pixel:nth-child(18) .hand_minute,
+.digit_8 .pixel:nth-child(21) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(11) .hand_hour,
+.digit_8 .pixel:nth-child(19) .hand_hour,
+.digit_8 .pixel:nth-child(24) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_8 .pixel:nth-child(11) .hand_minute,
+.digit_8 .pixel:nth-child(19) .hand_minute,
+.digit_8 .pixel:nth-child(24) .hand_minute {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(1) .hand_hour,
+.digit_9 .pixel:nth-child(6) .hand_hour,
+.digit_9 .pixel:nth-child(17) .hand_hour {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(1) .hand_minute,
+.digit_9 .pixel:nth-child(6) .hand_minute,
+.digit_9 .pixel:nth-child(17) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(2) .hand_hour,
+.digit_9 .pixel:nth-child(3) .hand_hour,
+.digit_9 .pixel:nth-child(14) .hand_hour,
+.digit_9 .pixel:nth-child(18) .hand_hour,
+.digit_9 .pixel:nth-child(22) .hand_hour,
+.digit_9 .pixel:nth-child(23) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(2) .hand_minute,
+.digit_9 .pixel:nth-child(3) .hand_minute,
+.digit_9 .pixel:nth-child(14) .hand_minute,
+.digit_9 .pixel:nth-child(18) .hand_minute,
+.digit_9 .pixel:nth-child(22) .hand_minute,
+.digit_9 .pixel:nth-child(23) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(4) .hand_hour,
+.digit_9 .pixel:nth-child(7) .hand_hour,
+.digit_9 .pixel:nth-child(15) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(4) .hand_minute,
+.digit_9 .pixel:nth-child(7) .hand_minute,
+.digit_9 .pixel:nth-child(15) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(5) .hand_hour,
+.digit_9 .pixel:nth-child(8) .hand_hour,
+.digit_9 .pixel:nth-child(9) .hand_hour,
+.digit_9 .pixel:nth-child(12) .hand_hour,
+.digit_9 .pixel:nth-child(16) .hand_hour,
+.digit_9 .pixel:nth-child(20) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(5) .hand_minute,
+.digit_9 .pixel:nth-child(8) .hand_minute,
+.digit_9 .pixel:nth-child(9) .hand_minute,
+.digit_9 .pixel:nth-child(12) .hand_minute,
+.digit_9 .pixel:nth-child(16) .hand_minute,
+.digit_9 .pixel:nth-child(20) .hand_minute {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(10) .hand_hour,
+.digit_9 .pixel:nth-child(13) .hand_hour,
+.digit_9 .pixel:nth-child(21) .hand_hour {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(10) .hand_minute,
+.digit_9 .pixel:nth-child(13) .hand_minute,
+.digit_9 .pixel:nth-child(21) .hand_minute {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(11) .hand_hour,
+.digit_9 .pixel:nth-child(19) .hand_hour,
+.digit_9 .pixel:nth-child(24) .hand_hour {
+  transform: translate(-50%, -50%) rotate(-90deg) translateY(-50%);
+}
+
+.digit_9 .pixel:nth-child(11) .hand_minute,
+.digit_9 .pixel:nth-child(19) .hand_minute,
+.digit_9 .pixel:nth-child(24) .hand_minute {
+  transform: translate(-50%, -50%) rotate(0deg) translateY(-50%);
+}
+
+.upload-container {
+  column-count: 3;
+  column-gap: 12px;
+  line-height: 32px;
+  padding: 18px;
+}
+
+@media (max-width: 600px) {
+  .upload-container {
+    column-count: 2;
+  }
+}
+img {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  filter: grayscale(70%);
+  background: #f7f7f7;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+img:hover {
+  filter: grayscale(0%);
+}
+
+  </style>
+  
+<div class='wrapper'>
+  <div class='clocks'>
+    <div class='number number_1'>
+      <div class='digit digit_0'>
+        <div class='pixel pixel_1'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_2'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_3'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_4'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_5'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_6'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_7'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_8'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_9'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_10'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_11'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_12'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_13'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_14'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_15'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_16'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_17'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_18'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_19'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_20'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_21'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_22'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_23'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_24'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+      </div>
+      <div class='digit digit_0'>
+        <div class='pixel pixel_1'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_2'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_3'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_4'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_5'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_6'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_7'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_8'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_9'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_10'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_11'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_12'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_13'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_14'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_15'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_16'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_17'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_18'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_19'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_20'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_21'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_22'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_23'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_24'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='number number_2'>
+      <div class='digit digit_0'>
+        <div class='pixel pixel_1'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_2'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_3'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_4'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_5'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_6'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_7'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_8'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_9'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_10'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_11'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_12'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_13'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_14'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_15'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_16'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_17'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_18'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_19'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_20'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_21'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_22'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_23'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_24'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+      </div>
+      <div class='digit digit_0'>
+        <div class='pixel pixel_1'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_2'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_3'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_4'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_5'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_6'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_7'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_8'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_9'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_10'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_11'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_12'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_13'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_14'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_15'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_16'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_17'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_18'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_19'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_20'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_21'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_22'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_23'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_24'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='number number_3'>
+      <div class='digit digit_0'>
+        <div class='pixel pixel_1'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_2'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_3'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_4'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_5'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_6'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_7'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_8'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_9'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_10'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_11'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_12'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_13'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_14'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_15'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_16'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_17'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_18'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_19'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_20'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_21'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_22'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_23'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_24'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+      </div>
+      <div class='digit digit_0'>
+        <div class='pixel pixel_1'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_2'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_3'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_4'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_5'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_6'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_7'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_8'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_9'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_10'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_11'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_12'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_13'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_14'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_15'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_16'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_17'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_18'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_19'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_20'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_21'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_22'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_23'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+        <div class='pixel pixel_24'>
+          <div class='clock'>
+            <div class='hand hand_minute'></div>
+            <div class='hand hand_hour'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="upload-container">
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3ccRxH18RHMUwVuL8bVzwmDJ_W7iUviiVXfcLr75tYgrS7tdE61WiWlib28e2p03IFatOpG_BIpRpf0CtRpBsU7BVelM3mBUEs5gEeKU8vgCQw2nYI0-8DaOaPHHiDeVExGJqiwqeVRxl_xXhBT14yEsA=w600-h900-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3fJFDXszDPh5t-mvt9Sv68KWwZHKHeVvdIbpalrx3p9B8C85ZITxOByfpK8Nzk8L3TGS5df_GcAc_NLN6bjYn36nY7h3T9WoHHLEK4JSsY-ioyQ1epxxO0pbYbsjFWR88qAv8eqIC14TyxrJ-EfqgFn7w=w2492-h1662-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3eSw3l8AXRDfjfBNbz8KbDDnQq8vz57N2d7FSMkUYpQyvfTqqvqfFH_rcZ0DExekpXGXlLv7BjGb5LcWT1bXTp71C6fdA86rRAx4u2n8-N0DDULWOSrp2BVRkW4c38dBntKPdQ7rj_M5NqRuQ315e4EPQ=w1312-h1968-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3dXPQ6nhqfgjAgFqt3IN03t9EqKhY9fvnPBd5wuuVyokAMn4L4alUS8uCk5S6WIjDvxQvRpq9u5HlNbGl7VFmAe19ZLMUnZql7IdHJ4Ne-c0jv_3yYaggLKFcxcZEuks0d0U1EMWDH4DRz6VLhsC-z5NQ=w2492-h1662-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3cJEnp_9ER6Ut1gwf0pRPNCkPe0QnnNOr7svcFU0i6id1m75hurj2FmYDWMOiQZIjM-BHjxg9iYtaLvdaCrHsdtj8co2FAc0O_cQtzodC2bLFPKDrl5cT8dVWiF1kkC-V_ANc6F002VML82AiPUlz5KQQ=w1312-h1968-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3dauaGles8exqzhSEmGlgf7hccrQ4U9DRyt5YcF_cx9-MftHKHDr4yN87y9jMEVnaP4LrfhwW3UL9UPjGgtsGoeUG-JvT7TqcHdsO7j3ZKRMEBLz8E6WR1xvgoQWr0BYnOWGDVVp02Bj-dIn-_I-nyAEQ=w1312-h1968-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3d4KLEjt8drRvhOYe78U7tZeXSNfb-okRmY8XvOdZmGuIKyRD1VdCXy0RUH4AvGa_y738VD8Am8XR316Xt-EAde5i4r8GYsMZDpeYbs7VB5gCSDBek1CHrsnaSGHDqSyi3CYQdVCSUcGvP_9VVPKEnrTw=w2492-h1662-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3fK8oaa5HxL4coq2nx5NeeIQ9548ctHb7OY2aLYvGg3FYjZg_rgcJtgnIklVa_NByfaGTkOXiwNcQyuTX_QNXZE7vtRBAoTSMS0JUQHJoLqZAOKGiIqYGQ9MhvGNMzIz64O85CcE1F-KKVADt5mygoHRQ=w2449-h1633-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3dfhPPcgCqXj__dhOh4DJPH-EJGxyEMh-pdxCDRV8xz5e2BEEzg-pKLB3KQOWcubWbJ_EJeqtdT_WQYX41tkQeHVJ52ZhvD8mfHMMf9k7HhvpctuCFuu7E6Ih9j35nX9xZrA2O5xPvZmEJ9sNHcWcRy3Q=w1350-h1013-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3fv_uHmjeWerZ_o02RGchAdk3jvBHhdqWwaUJDI00yf_7xVQ7Apz7eQ2Gps-XJ41Znb6Y81FemsX2TBkPjPetWdM1AEoEx1xsEMZbmX_cH2xMsrme8x4Bguz6tB1kwq6_yM2lNVDuaRANppQfSeGzmPIQ=w1280-h853-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3cK9sTD4UNKdW1xOm09mGUDOsf-8GszM-rWyWZJ5x3QlsigQa50au1enZCTHPsB3hbDjbgxqwFIG_abeF3XmX2oLGkoJPACwJn-qmbp48gPHJaaqyuMz_g_fqJhzShYuUF50UHDxBXTMvCgOwrIqFB5CA=w2492-h1870-no?authuser=0">
+  
+  <img src="https://lh3.googleusercontent.com/pw/ACtC-3dcVD24xMJiRrbsn4IffmWQ2gCQzXUu1JwE8jmJnV3qDhFHsRiWt_kUy4juRdEJ3FzZHa-yA5WSirmWYmrxavmkeeLfNTOQUVKTfqLAMOurbrI1lsyAkfWepj63qgoAwIrIOSLcs0qRlnpwxYlpNDXpbQ=w2492-h1870-no?authuser=0">
+  
+</div>
+  
+  <script>
+    let digit = document.getElementsByClassName('digit');
+
+function setTime() {
+    time_numbers = ((new Date()).toTimeString().substr(0,8)).split(':').join('');
+
+    for (let i = 0; i < time_numbers.length; i++) {
+        digit[i].className = 'digit digit_' + time_numbers.charAt(i);
+    }
+};
+
+setTime();
+setInterval(setTime, 1000);
+  </script>
+  </body>
+</html>
+  
+
